@@ -1,6 +1,3 @@
-from random import *
-
-
 def cluster(libraries):
     clusters = list()
     while len(libraries) > 0:
@@ -11,11 +8,16 @@ def cluster(libraries):
             if matches(libraries[0], library):
                 cluster.append(library)
                 libraries.remove(library)
-        libraries.pop(0)
+        cluster.append(libraries.pop(0))
         clusters.append(cluster)
     return clusters
 
 
-def matches(main, sub):
-    print(main + " | " + sub)
-    return randint(1, 100) > 50
+def matches(f, o):
+    first = f.split(".")
+    other = o.split(".")
+    size = len(first) if len(first) < len(other) else len(other)
+    # print("..."+str(size))
+    # for i in range(size):
+    #     print(first[i] + " | " +  other[i])
+    return True

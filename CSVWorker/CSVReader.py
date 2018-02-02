@@ -4,14 +4,13 @@ def extractFirstColumn(line, __DELIMITER__=","):
 
 class CSVReader:
 
-    def __init__(self, file_name):
-        self.file_name = file_name
-
-    def readFile(self):
+    def __init__(self):
         self.content = list()
-        with open(self.file_name) as f:
+
+    def read_file(self, file_name):
+        with open(file_name) as f:
             for line in f:
                 self.content.append(extractFirstColumn(line))
 
-    def getLibraries(self):
+    def get_libraries(self):
         return self.content

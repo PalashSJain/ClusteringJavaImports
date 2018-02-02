@@ -5,9 +5,9 @@ from Main.Utils import Utils as Utils
 
 
 def __main__():
-    reader = CSVReader("input.csv")
-    reader.readFile()
-    libraries = reader.getLibraries()
+    reader = CSVReader()
+    reader.read_file("input.csv")
+    libraries = reader.get_libraries()
 
     clusters = Cluster.cluster(libraries)
 
