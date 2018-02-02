@@ -12,7 +12,7 @@ def __main__():
     clusters = Cluster.cluster(libraries)
 
     for cluster in clusters:
-        Utils.make_dirs()
+        Utils.make_dirs(Utils.__OUTPUT_DIR__)
         for library in cluster:
             writer.println(library, Utils.__OUTPUT_DIR__ + str(clusters.index(cluster)) + ".csv")
 
