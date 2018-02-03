@@ -11,10 +11,16 @@ def __main__():
 
     clusters = Cluster.cluster(libraries)
 
+    print(len(clusters))
+
+    cluster_index = 0
+
     for cluster in clusters:
         Utils.make_dirs(Utils.__OUTPUT_DIR__)
         for library in cluster:
-            writer.println(library, Utils.__OUTPUT_DIR__ + str(clusters.index(cluster)) + ".csv")
+            writer.println(library, Utils.__OUTPUT_DIR__ + str(cluster_index) + ".csv")
+
+        cluster_index += 1
 
 
 __main__()
