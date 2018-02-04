@@ -19,7 +19,7 @@ def __main__():
         Utils.make_dirs(Utils.__OUTPUT_DIR__)
         for library in cluster:
             writer.println(library, Utils.__OUTPUT_DIR__ + str(cluster_index) + ".csv")
-            writer.println(library, "output.csv")
+            writer.println(library, "output_"+str(Utils.__THRESHOLD__)+".csv")
         writer.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", "output.csv")
 
         cluster_index += 1
