@@ -14,4 +14,7 @@ class Utils:
 
     @staticmethod
     def not_a_stop_word(method_caller_type):
-        return method_caller_type not in ('MethodCallerType', 'java.lang.String', 'byte[]')
+        return method_caller_type not in ('MethodCallerType',
+                                          'java.lang.String',
+                                          'byte[]',
+                                          'java.util.Map<java.lang.String, java.lang.Object>')
