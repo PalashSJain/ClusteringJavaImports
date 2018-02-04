@@ -20,7 +20,7 @@ def __main__():
         for library in cluster:
             writer.println(library, Utils.__OUTPUT_DIR__ + str(cluster_index) + ".csv")
             writer.println(library, "output_"+str(Utils.__THRESHOLD__)+".csv")
-        writer.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", "output.csv")
+        writer.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", "output_"+str(Utils.__THRESHOLD__)+".csv")
 
         cluster_index += 1
 
