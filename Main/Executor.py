@@ -5,8 +5,9 @@ from Main.Utils import Utils as Utils
 
 
 def __main__():
+    file_name = "AuthTests-MethodCalls-Sample2"
     reader = CSVReader()
-    reader.read_file("input.csv")
+    reader.read_file(file_name + ".csv")
     libraries = reader.get_libraries()
 
     clusters = Cluster.cluster(libraries)
@@ -19,8 +20,9 @@ def __main__():
         Utils.make_dirs(Utils.__OUTPUT_DIR__)
         for library in cluster:
             writer.println(library, Utils.__OUTPUT_DIR__ + str(cluster_index) + ".csv")
-            writer.println(library, "output_"+str(Utils.__THRESHOLD__)+".csv")
-        writer.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", "output_"+str(Utils.__THRESHOLD__)+".csv")
+            writer.println(library, file_name + "_output_" + str(Utils.__THRESHOLD__) + ".csv")
+        writer.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+                       file_name + "_output_" + str(Utils.__THRESHOLD__) + ".csv")
 
         cluster_index += 1
 
