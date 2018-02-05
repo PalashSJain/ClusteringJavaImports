@@ -2,6 +2,8 @@ from Main.Utils import Utils as Utils
 
 
 def run(libraries):
+    libraries.sort()
+
     clusters = list()
 
     while len(libraries) > 0:
