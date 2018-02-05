@@ -1,4 +1,5 @@
 import os
+import shutil
 
 
 class Utils:
@@ -19,3 +20,15 @@ class Utils:
                                           'java.lang.String',
                                           'byte[]',
                                           'java.util.Map<java.lang.String, java.lang.Object>')
+
+    @staticmethod
+    def delete_folder(directory=__OUTPUT_DIR__):
+        print("Deleting folder: " + directory)
+        if os.path.exists(directory):
+            shutil.rmtree(directory)
+
+    @staticmethod
+    def delete_file(output_file):
+        print("Deleting file: " + output_file)
+        if os.path.exists(output_file):
+            os.remove(output_file)
