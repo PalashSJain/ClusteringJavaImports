@@ -27,4 +27,5 @@ class CSVReader:
                     self.content.append(method_caller_type)
 
     def get_libraries(self):
+        self.content.sort()
         return self.content
