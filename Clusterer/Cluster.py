@@ -1,7 +1,7 @@
 from Main.Utils import Utils as Utils
 
 
-def cluster(libraries):
+def run(libraries):
     clusters = list()
 
     while len(libraries) > 0:

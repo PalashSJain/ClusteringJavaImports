@@ -1,3 +1,5 @@
+import os
+
 from CSVWorker.CSVReader import CSVReader
 from Clusterer import Cluster
 from CSVWorker.CSVWriter import CSVWriter as writer
@@ -5,26 +7,27 @@ from Main.Utils import Utils as Utils
 
 
 def __main__():
-    file_name = "AuthTests-MethodCalls-Sample2"
-    reader = CSVReader()
-    reader.read_file(file_name + ".csv")
-    libraries = reader.get_libraries()
+    input_files = os.listdir("input")
+    Utils.make_dirs(Utils.__OUTPUT_DIR__)
 
-    clusters = Cluster.cluster(libraries)
+    for file_name in input_files:
+        output_file = Utils.__OUTPUT_DIR__ + str(Utils.__THRESHOLD__) + "_" + file_name
 
-    print(len(clusters))
+        print("Reading file: " + file_name)
+        reader = CSVReader()
+        reader.read_file(Utils.__INPUT_DIR__ + file_name)
+        libraries = reader.get_libraries()
 
-    cluster_index = 0
+        print("Starting to cluster...")
+        clusters = Cluster.run(libraries)
 
-    for cluster in clusters:
-        Utils.make_dirs(Utils.__OUTPUT_DIR__)
-        for library in cluster:
-            writer.println(library, Utils.__OUTPUT_DIR__ + str(cluster_index) + ".csv")
-            writer.println(library, file_name + "_output_" + str(Utils.__THRESHOLD__) + ".csv")
-        writer.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-                       file_name + "_output_" + str(Utils.__THRESHOLD__) + ".csv")
+        print("Writing output to: " + output_file)
+        for cluster in clusters:
+            for library in cluster:
+                writer.println(library, output_file)
+            writer.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", output_file)
 
-        cluster_index += 1
+    print("Fin.")
 
 
 __main__()

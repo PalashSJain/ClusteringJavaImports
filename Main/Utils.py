@@ -2,6 +2,7 @@ import os
 
 
 class Utils:
+    __INPUT_DIR__ = "input/"
     __OUTPUT_DIR__ = "output/"
     __DELIMITER__ = ","
     __THRESHOLD__ = 75
