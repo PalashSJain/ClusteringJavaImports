@@ -31,7 +31,26 @@ def run(libraries):
         cluster.append(libraries.pop(0))
         clusters.append(cluster)
 
-    return clusters, single_size_cluster
+    clusters.append(single_size_cluster)
+    return clusters
+
+
+def has_min_matches(consecutive_matches_count, size):
+    # for a given SIZE, it should have a minimum of CONSECUTIVE_MATCHES_COUNT to qualify as matching
+    dict = {1: 1,
+            2: 1,
+            3: 2,
+            4: 3,
+            5: 4,
+            6: 4,
+            7: 5,
+            8: 6,
+            9: 7,
+            10: 8,
+            11: 9,
+            12: 10,
+            13: 11}
+    return dict[size] <= consecutive_matches_count
 
 
 def matches(f, o):
@@ -40,9 +59,23 @@ def matches(f, o):
     size = len(first) if len(first) < len(other) else len(other)
 
     consecutive_matches_count = 0
-    for i, j in range(size):
-        if first[i] == other[j]:
+    iF = 0
+    iO = 0
+
+    if Utils.is_ignore_word(first[iF]):
+        iF += 1
+    if Utils.is_ignore_word(other[iO]):
+        iO += 1
+
+    for i in range(size):
+        if first[iF] == other[iO]:
             consecutive_matches_count += 1
+            iF += 1
+            iO += 1
         else:
             break
-    return (consecutive_matches_count * 100 / size) >= Utils.__THRESHOLD__
+
+        if iF == size or iO == size:
+            break
+    # return (consecutive_matches_count * 100 / size) >= Utils.__THRESHOLD__
+    return has_min_matches(consecutive_matches_count, size)

@@ -6,7 +6,6 @@ class Utils:
     __INPUT_DIR__ = "input/"
     __OUTPUT_DIR__ = "output/"
     __DELIMITER__ = ","
-    __THRESHOLD__ = 75
     __METHOD_CALLER_TYPE__ = 1
 
     @staticmethod
@@ -32,3 +31,7 @@ class Utils:
         print("Deleting file: " + output_file)
         if os.path.exists(output_file):
             os.remove(output_file)
+
+    @staticmethod
+    def is_ignore_word(word):
+        return word in ('org', 'java')

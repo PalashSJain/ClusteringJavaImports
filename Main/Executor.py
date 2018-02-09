@@ -10,8 +10,6 @@ from threading import Thread
 
 
 def __main__():
-    setup()
-
     input_files = os.listdir("input")
     Utils.make_dirs(Utils.__OUTPUT_DIR__)
 
@@ -27,43 +25,29 @@ def __main__():
 
 
 def execute(file_name):
-    output_file = Utils.__OUTPUT_DIR__ + str(Utils.__THRESHOLD__) + "_" + file_name
+    output_file = Utils.__OUTPUT_DIR__ + "output_" + file_name
     print("Reading file: " + file_name)
     reader = CSVReader()
     reader.read_file(Utils.__INPUT_DIR__ + file_name)
     libraries = reader.get_libraries()
 
     print("Starting to cluster "+file_name+"...")
-    clusters, single_items = Cluster.run(libraries)
+    clusters = Cluster.run(libraries)
 
     Utils.delete_file(output_file)
     print("Writing output to: " + output_file)
-    write_cluster_to_output_file(clusters, output_file)
-    write_library_to_output_file(single_items, output_file)
+    write_clusters_to_output_file(clusters, output_file)
 
 
-def write_cluster_to_output_file(clusters, output_file):
+def write_clusters_to_output_file(clusters, output_file):
     for cluster in clusters:
-        write_library_to_output_file(cluster, output_file)
+        write_cluster_to_output_file(cluster, output_file)
 
 
-def write_library_to_output_file(cluster, output_file):
+def write_cluster_to_output_file(cluster, output_file):
     for library in cluster:
         writer.println(library, output_file)
     writer.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", output_file)
-
-
-def setup():
-    if len(sys.argv) == 2:
-        try:
-            print("Setting threshold to " + sys.argv[1])
-            Utils.__THRESHOLD__ = int(sys.argv[1])
-        except:
-            print("Threshold set is not a number. Threshold set to default value of 75.")
-            Utils.__THRESHOLD__ = 75
-    else:
-        print("Threshold value not passed. Threshold set to default value of 75.")
-        Utils.__THRESHOLD__ = 75
 
 
 __main__()
