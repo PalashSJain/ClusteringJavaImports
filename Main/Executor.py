@@ -34,18 +34,23 @@ def execute(file_name):
     libraries = reader.get_libraries()
 
     print("Starting to cluster "+file_name+"...")
-    clusters = Cluster.run(libraries)
+    clusters, single_items = Cluster.run(libraries)
 
     Utils.delete_file(output_file)
     print("Writing output to: " + output_file)
     write_cluster_to_output_file(clusters, output_file)
+    write_library_to_output_file(single_items, output_file)
 
 
 def write_cluster_to_output_file(clusters, output_file):
     for cluster in clusters:
-        for library in cluster:
-            writer.println(library, output_file)
-        writer.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", output_file)
+        write_library_to_output_file(cluster, output_file)
+
+
+def write_library_to_output_file(cluster, output_file):
+    for library in cluster:
+        writer.println(library, output_file)
+    writer.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", output_file)
 
 
 def setup():
