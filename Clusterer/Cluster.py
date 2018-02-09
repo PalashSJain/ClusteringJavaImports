@@ -5,6 +5,15 @@ def no_of_classes(library):
     return len(library.split("."))
 
 
+def add_to_relevant_cluster(clusters, single_size_cluster):
+    for single_cluster in single_size_cluster:
+        for cluster in clusters:
+            for library in cluster:
+                if library.endswith(single_cluster):
+                    cluster.append(single_cluster)
+                    break
+
+
 def run(libraries):
     clusters = list()
     single_size_cluster = set()
@@ -31,6 +40,7 @@ def run(libraries):
         cluster.append(libraries.pop(0))
         clusters.append(cluster)
 
+    add_to_relevant_cluster(clusters, single_size_cluster)
     clusters.append(single_size_cluster)
     return clusters
 
