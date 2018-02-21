@@ -7,10 +7,16 @@ def no_of_classes(library):
 
 def add_to_relevant_cluster(clusters, single_size_cluster):
     for single_cluster in single_size_cluster:
+        isAdded = False
         for cluster in clusters:
+            if isAdded:
+                break
             for library in cluster:
+                if isAdded:
+                    break
                 if library.endswith(single_cluster):
                     cluster.append(single_cluster)
+                    isAdded = True
                     break
 
 
@@ -50,7 +56,7 @@ def has_min_matches(consecutive_matches_count, size):
     dict = {1: 1,
             2: 1,
             3: 2,
-            4: 2,
+            4: 3,
             5: 3,
             6: 4,
             7: 5,
